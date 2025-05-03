@@ -3,13 +3,14 @@
 }
 
 body {
-  background: transparent;
+  background: #111;
   margin: 0;
   font-family: 'DM Sans', sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;     /* Align items from the top */
+  min-height: 100vh;           /* Allow content to grow */
+  padding: 20px 0;             /* Add breathing space */
 }
 
 .carousel-container {
