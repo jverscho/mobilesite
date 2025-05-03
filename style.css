@@ -1,48 +1,51 @@
+/* Reset and global styles */
 * {
   box-sizing: border-box;
 }
 
-body {
-  background: transparent;
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: 'DM Sans', sans-serif;
+  background: transparent;
+  overflow: hidden; /* prevent vertical scroll bar */
+}
+
+/* Main body layout */
+body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  padding: 20px 0;
 }
 
+/* Carousel wrapper */
 .carousel-container {
   width: 90vw;
   max-width: 400px;
   text-align: center;
-  min-height: 800px; /* Ensures space for poster, button, and controls */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  padding-bottom: 40px; /* ensures full content is visible */
+  overflow: visible;
 }
 
+/* Carousel items */
 .carousel-item {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .carousel-item.active {
-  display: flex;
+  display: block;
 }
 
 .carousel-item img {
   width: 100%;
   height: auto;
-  max-height: 600px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* View Trailer button */
 .view-button {
   margin-top: 10px;
   padding: 6px 16px;
@@ -58,25 +61,11 @@ body {
   font-weight: 700;
 }
 
+/* Swipe instruction (instead of buttons) */
 .swipe-instruction {
   margin-top: 20px;
   font-size: 14px;
   color: #ffce10;
-  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   text-align: center;
-}
-
-.controls {
-  margin-top: 20px;
-}
-
-.controls button {
-  background: rgba(255, 255, 255, 0.8);
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  margin: 0 10px;
 }
