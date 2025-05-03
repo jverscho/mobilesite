@@ -58,6 +58,15 @@ body {
   font-weight: 700;
 }
 
+.swipe-instruction {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ffce10;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
 .controls {
   margin-top: 20px;
 }
