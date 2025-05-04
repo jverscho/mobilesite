@@ -26,6 +26,7 @@ body {
 .coming-soon-header {
   width: 100%;
   text-align: center;
+  margin: 30px;
 }
 
 .now-playing-title {
@@ -76,7 +77,6 @@ body {
 
 /* Instruction */
 .swipe-instruction {
-  margin-top: 20px;
   font-size: 14px;
   color: #ffce10;
   font-weight: 600;
