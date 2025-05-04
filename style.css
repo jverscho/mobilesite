@@ -86,6 +86,7 @@ body {
 
 .carousel-nav {
   touch-action: none;
+}
 /* Instruction */
 .swipe-instruction {
   margin-top: 8px;  /* Slight spacing between button and text */
