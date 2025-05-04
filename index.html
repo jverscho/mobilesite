@@ -31,7 +31,7 @@
   <div class="swipe-instruction">Swipe or Click for More</div>
 
 <script>
- document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
     const items = document.querySelectorAll('.carousel-item');
     let current = 0;
 
@@ -55,36 +55,40 @@
 
     const carousel = document.querySelector('.carousel-container');
 
-    // ✅ Allow click to advance, unless clicking a button or link
+    // 🟡 Handle tap/click
     carousel.addEventListener('click', function (e) {
       if (e.target.closest('a') || e.target.closest('button')) return;
       nextSlide();
     });
 
-    // ✅ Swipe with vertical scroll support
+    // 🟢 Robust swipe with scroll passthrough
     let touchStartX = 0;
     let touchStartY = 0;
+    let scrolling = false;
 
     carousel.addEventListener('touchstart', function (e) {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
+      scrolling = false;
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', function (e) {
+      const moveY = e.changedTouches[0].screenY;
+      if (Math.abs(moveY - touchStartY) > 10) {
+        scrolling = true; // it's a vertical scroll
+      }
     }, { passive: true });
 
     carousel.addEventListener('touchend', function (e) {
+      if (scrolling) return; // Don't trigger if it was vertical scroll
+
       const touchEndX = e.changedTouches[0].screenX;
-      const touchEndY = e.changedTouches[0].screenY;
-
       const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
 
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (deltaX < -50) nextSlide();
-        if (deltaX > 50) prevSlide();
-        e.preventDefault(); // Prevent horizontal scroll only
-      }
-    }, { passive: false }); // Needed for preventDefault()
+      if (deltaX < -50) nextSlide();
+      if (deltaX > 50) prevSlide();
+    }, { passive: false });
   });
 </script>
-
 </body>
 </html>
