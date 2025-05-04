@@ -12,8 +12,7 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  touch-action: pan-y;
+  overscroll-behavior-y: auto;  /* allow parent scroll chaining */
 }
 
 /* Layout */
@@ -23,13 +22,14 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px 0;
+  touch-action: pan-y; /* enable vertical scroll globally */
 }
 
 /* Heading styling */
 .coming-soon-header {
   width: 100%;
   text-align: center;
-  margin: 30px;
+  margin: 30px 0;
 }
 
 .now-playing-title {
@@ -45,13 +45,12 @@ body {
   width: 90vw;
   max-width: 400px;
   text-align: center;
-  padding-bottom: 60px;
-  touch-action: pan-y;
+  padding-bottom: 40px;  /* reduced bottom padding to fix layout gap */
 }
 
+/* Only one item visible at a time */
 .carousel-item {
   display: none;
-  touch-action: pan-y;
 }
 
 .carousel-item.active {
@@ -82,7 +81,7 @@ body {
 
 /* Instruction */
 .swipe-instruction {
-  margin-top: 0px;
+  margin-top: 8px;  /* Slight spacing between button and text */
   font-size: 14px;
   color: #ffce10;
   font-weight: 600;
