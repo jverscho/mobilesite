@@ -46,6 +46,12 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
+.coming-soon-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .now-playing-header {
   text-align: center;
   margin-bottom: 30px;
