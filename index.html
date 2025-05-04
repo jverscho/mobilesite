@@ -55,29 +55,37 @@
 
     const carousel = document.querySelector('.carousel-container');
 
+    // Click advances if not on a button or link
     carousel.addEventListener('click', function (e) {
       if (e.target.closest('a') || e.target.closest('button')) return;
       nextSlide();
     });
 
+    // Swipe detection with touchmove
     let touchStartX = 0;
     let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
 
     carousel.addEventListener('touchstart', function (e) {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
+    carousel.addEventListener('touchmove', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
     carousel.addEventListener('touchend', function (e) {
-      const touchEndX = e.changedTouches[0].screenX;
-      const touchEndY = e.changedTouches[0].screenY;
       const deltaX = touchEndX - touchStartX;
       const deltaY = touchEndY - touchStartY;
 
+      // Only act if it's primarily a horizontal swipe
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         if (deltaX < -50) nextSlide();
         if (deltaX > 50) prevSlide();
-        e.preventDefault(); // Only prevent default on horizontal swipe
+        e.preventDefault(); // block any accidental scroll for horizontal swipes
       }
     }, { passive: false });
   });
