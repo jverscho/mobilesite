@@ -23,7 +23,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px 0;
-  touch-action: pan-x;
+  touch-action: pan-y;
   overscroll-behavior-y: auto;
 }
 
@@ -48,9 +48,11 @@ body {
   max-width: 400px;
   text-align: center;
   padding-bottom: 40px;  /* reduced bottom padding to fix layout gap */
-  touch-action: pan-x;
-  touch-action: pan-x;
   overscroll-behavior-y: auto;
+  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 /* Only one item visible at a time */
