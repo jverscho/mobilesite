@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile Carousel</title>
+  <title>Coming Soon Carousel</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="now-playing-header coming-soon-header">
+
+  <div class="coming-soon-header">
     <h1 class="now-playing-title">COMING SOON</h1>
   </div>
 
@@ -27,7 +28,6 @@
     </div>
   </div>
 
-  <!-- Move instruction OUTSIDE to prevent conflict -->
   <div class="swipe-instruction">Swipe or Click for More</div>
 
   <script>
@@ -55,13 +55,11 @@
 
       const carousel = document.querySelector('.carousel-container');
 
-      // ✅ Prevent slide if button or link is clicked
       carousel.addEventListener('click', function (e) {
         if (e.target.closest('a') || e.target.closest('button')) return;
         nextSlide();
       });
 
-      // ✅ Swipe support
       let touchStartX = 0;
       let touchEndX = 0;
 
@@ -76,5 +74,6 @@
       }, false);
     });
   </script>
+
 </body>
 </html>
