@@ -77,6 +77,7 @@ body {
 
 /* Instruction */
 .swipe-instruction {
+  margin-top: 10px;
   font-size: 14px;
   color: #ffce10;
   font-weight: 600;
