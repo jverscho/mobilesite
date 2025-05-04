@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coming Soon Carousel</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,700&display=swap"
-        rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="coming-soon-header">
@@ -16,82 +15,71 @@
   <div class="carousel-container">
     <div class="carousel-item active">
       <img src="How To Train Your Dragon.jpg" alt="How To Train Your Dragon">
-      <a href="https://www.sunsetdriveinslo.com/how-to-train-your-dragon"
-         class="view-button" target="_blank" rel="noopener noreferrer">
-        View Trailer
-      </a>
+      <a href="https://www.sunsetdriveinslo.com/how-to-train-your-dragon" target="_blank" rel="noopener noreferrer" class="view-button">View Trailer</a>
     </div>
     <div class="carousel-item">
       <img src="Karate Kid Legends.jpg" alt="Karate Kid Legends">
-      <a href="https://www.sunsetdriveinslo.com/karate-kid-legends"
-         class="view-button" target="_blank" rel="noopener noreferrer">
-        View Trailer
-      </a>
+      <a href="https://www.sunsetdriveinslo.com/karate-kid-legends" target="_blank" rel="noopener noreferrer" class="view-button">View Trailer</a>
     </div>
     <div class="carousel-item">
       <img src="Lilo and Stitch.jpg" alt="Lilo and Stitch">
-      <a href="https://www.sunsetdriveinslo.com/lilo-stitch"
-         class="view-button" target="_blank" rel="noopener noreferrer">
-        View Trailer
-      </a>
+      <a href="https://www.sunsetdriveinslo.com/lilo-stitch" target="_blank" rel="noopener noreferrer" class="view-button">View Trailer</a>
     </div>
   </div>
+  <div class="swipe-instruction">Swipe or Click for More</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll('.carousel-item');
+  let current = 0;
 
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll('.carousel-item');
-    let current = 0;
-
-    function updateCarousel() {
-      items.forEach((item, i) =>
-        item.classList.toggle('active', i === current)
-      );
-    }
-
-    function nextSlide() {
-      current = (current + 1) % items.length;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      current = (current - 1 + items.length) % items.length;
-      updateCarousel();
-    }
-
+  function updateCarousel() {
+    items.forEach((item, i) =>
+      item.classList.toggle('active', i === current)
+    );
+  }
+  function nextSlide() {
+    current = (current + 1) % items.length;
     updateCarousel();
+  }
+  function prevSlide() {
+    current = (current - 1 + items.length) % items.length;
+    updateCarousel();
+  }
 
-    const carousel = document.querySelector('.carousel-container');
+  updateCarousel();
 
-    // click to advance unless clicking the link
-    carousel.addEventListener('click', e => {
-      if (e.target.closest('a')) return;
-      nextSlide();
-    });
+  const carousel = document.querySelector('.carousel-container');
 
-    // swipe detection
-    let startX = 0, startY = 0, movedX = 0, movedY = 0;
-
-    carousel.addEventListener('touchstart', e => {
-      startX = e.touches[0].screenX;
-      startY = e.touches[0].screenY;
-      movedX = movedY = 0;
-    }, { passive: true });
-
-    carousel.addEventListener('touchmove', e => {
-      movedX = e.touches[0].screenX - startX;
-      movedY = e.touches[0].screenY - startY;
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', e => {
-      // only intercept clear horizontal swipes
-      if (Math.abs(movedX) > Math.abs(movedY) && Math.abs(movedX) > 50) {
-        e.preventDefault();
-        if (movedX < 0) nextSlide();
-        else           prevSlide();
-      }
-      // vertical drags are left alone—page will scroll
-    }, { passive: false });
+  // click-to-advance (ignores links/buttons)
+  carousel.addEventListener('click', e => {
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    nextSlide();
   });
-  </script>
+
+  // swipe detection
+  let startX = 0, startY = 0, movedX = 0, movedY = 0;
+
+  carousel.addEventListener('touchstart', e => {
+    startX = e.touches[0].screenX;
+    startY = e.touches[0].screenY;
+    movedX = movedY = 0;
+  }, { passive: true });
+
+  carousel.addEventListener('touchmove', e => {
+    movedX = e.touches[0].screenX - startX;
+    movedY = e.touches[0].screenY - startY;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', e => {
+    // only treat horizontal swipes
+    if (Math.abs(movedX) > Math.abs(movedY) && Math.abs(movedX) > 50) {
+      e.preventDefault(); // block only the horizontal scroll
+      if (movedX < 0) nextSlide();
+      else           prevSlide();
+    }
+    // otherwise allow vertical scrolling
+  }, { passive: false });
+});
+</script>
 </body>
 </html>
