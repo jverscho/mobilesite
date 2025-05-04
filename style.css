@@ -49,7 +49,7 @@ body {
   text-align: center;
   padding-bottom: 40px;  /* reduced bottom padding to fix layout gap */
   touch-action: pan-x;
-  -ms-touch-action: pan-x;
+  touch-action: pan-x;
   overscroll-behavior-y: auto;
 }
 
@@ -67,6 +67,8 @@ body {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  pointer-events: none;  /* clicks/swipes fall through to the container */
+  touch-action: none;    /* we don’t need the image to handle anything */
 }
 
 /* Button */
