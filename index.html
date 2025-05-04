@@ -31,7 +31,7 @@
   <div class="swipe-instruction">Swipe or Click for More</div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
     const items = document.querySelectorAll('.carousel-item');
     let current = 0;
 
@@ -55,20 +55,20 @@
 
     const carousel = document.querySelector('.carousel-container');
 
-    // ✅ Click handling (ignore buttons/links)
+    // ✅ Allow click to advance, unless clicking a button or link
     carousel.addEventListener('click', function (e) {
       if (e.target.closest('a') || e.target.closest('button')) return;
       nextSlide();
     });
 
-    // ✅ Swipe handling with vertical scroll pass-through
+    // ✅ Swipe with vertical scroll support
     let touchStartX = 0;
     let touchStartY = 0;
 
     carousel.addEventListener('touchstart', function (e) {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true }); // Allow scrolling by default
+    }, { passive: true });
 
     carousel.addEventListener('touchend', function (e) {
       const touchEndX = e.changedTouches[0].screenX;
@@ -77,15 +77,12 @@
       const deltaX = touchEndX - touchStartX;
       const deltaY = touchEndY - touchStartY;
 
-      // Only act on horizontal swipe
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         if (deltaX < -50) nextSlide();
         if (deltaX > 50) prevSlide();
-        e.preventDefault(); // Prevent accidental horizontal scroll
+        e.preventDefault(); // Prevent horizontal scroll only
       }
-      // Vertical swipes scroll the page — no preventDefault
-    }, { passive: false }); // Allow us to optionally prevent horizontal scroll
-  });
+    }, { passive: false }); // Needed for preventDefault()
   });
 </script>
 
