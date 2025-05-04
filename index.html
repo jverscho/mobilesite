@@ -55,35 +55,37 @@
 
     const carousel = document.querySelector('.carousel-container');
 
+    // ✅ Click handling (ignore buttons/links)
     carousel.addEventListener('click', function (e) {
       if (e.target.closest('a') || e.target.closest('button')) return;
       nextSlide();
     });
 
+    // ✅ Swipe handling with vertical scroll pass-through
     let touchStartX = 0;
     let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
 
     carousel.addEventListener('touchstart', function (e) {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
-    }, false);
+    }, { passive: true }); // Allow scrolling by default
 
     carousel.addEventListener('touchend', function (e) {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
 
       const deltaX = touchEndX - touchStartX;
       const deltaY = touchEndY - touchStartY;
 
-      // Only trigger swipe if horizontal gesture is dominant
+      // Only act on horizontal swipe
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         if (deltaX < -50) nextSlide();
         if (deltaX > 50) prevSlide();
+        e.preventDefault(); // Prevent accidental horizontal scroll
       }
-      // Else: vertical scroll continues naturally
-    }, false);
+      // Vertical swipes scroll the page — no preventDefault
+    }, { passive: false }); // Allow us to optionally prevent horizontal scroll
+  });
   });
 </script>
 
