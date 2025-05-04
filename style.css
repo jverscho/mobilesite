@@ -1,20 +1,19 @@
-/* Reset & globals */
+/* Reset and global styles */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html, body {
+  margin: 0;
+  padding: 0;
+  height: auto;
   font-family: 'DM Sans', sans-serif;
   background: transparent;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-
-  /* only handle horizontal pans here */
-  touch-action: pan-x;         
-  overscroll-behavior-y: auto; /* allow vertical scroll to bubble up */
+  touch-action: pan-x;
+  overscroll-behavior-y: auto;
 }
 
 /* Layout */
@@ -22,31 +21,35 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
   min-height: 100vh;
+  padding: 20px 0;
+  touch-action: pan-x;
+  overscroll-behavior-y: auto;
 }
 
-/* Heading */
+/* Heading styling */
 .coming-soon-header {
   width: 100%;
   text-align: center;
-  margin-bottom: 20px;
-}
-.now-playing-title {
-  font-size: 24px;
-  font-weight: 700;
-  font-style: italic;
-  color: #e6e3df;
+  margin: 30px 0;
 }
 
-/* Carousel container */
+.now-playing-title {
+  font-size: 32px;
+  font-weight: 600;
+  font-style: italic;
+  color: #e6e3df;
+  margin: 0;
+}
+
+/* Carousel */
 .carousel-container {
-  position: relative;
   width: 90vw;
   max-width: 400px;
-  
-  /* only intercept horizontal pans on the container */
+  text-align: center;
+  padding-bottom: 40px;  /* reduced bottom padding to fix layout gap */
   touch-action: pan-x;
+  -ms-touch-action: pan-x;
   overscroll-behavior-y: auto;
 }
 
@@ -54,29 +57,38 @@ body {
 .carousel-item {
   display: none;
 }
+
 .carousel-item.active {
   display: block;
 }
 
-/* Poster image */
 .carousel-item img {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* View Trailer button */
+/* Button */
 .view-button {
-  display: inline-block;
   margin-top: 10px;
   padding: 6px 16px;
   background-color: #ffce10;
   color: #000;
   font-size: 14px;
-  font-weight: 700;
   border: none;
   border-radius: 4px;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* Instruction */
+.swipe-instruction {
+  margin-top: 8px;  /* Slight spacing between button and text */
+  font-size: 14px;
+  color: #ffce10;
+  font-weight: 600;
+  text-align: center;
 }
