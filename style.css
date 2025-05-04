@@ -13,24 +13,38 @@ html, body {
   overflow-y: auto;
 }
 
-/* Main body layout */
+/* Layout */
 body {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
   padding: 20px 0;
 }
 
-/* Carousel wrapper */
+/* Heading styling */
+.coming-soon-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.now-playing-title {
+  font-size: 32px;
+  font-weight: 600;
+  font-style: italic;
+  color: #e6e3df;
+  margin: 0;
+}
+
+/* Carousel */
 .carousel-container {
   width: 90vw;
   max-width: 400px;
   text-align: center;
-  padding-bottom: 50px; /* enough for button + swipe label */
+  padding-bottom: 60px;
 }
 
-/* Carousel items */
 .carousel-item {
   display: none;
 }
@@ -46,42 +60,22 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.coming-soon-header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px; /* Adds spacing below heading */
-}
-
-.now-playing-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.now-playing-title {
-  font-size: 32px;
-  font-weight: 600;
-  font-style: italic;
-  color: #e6e3df;
-  margin: 0;
-}
-/* View Trailer button */
+/* Button */
 .view-button {
   margin-top: 10px;
   padding: 6px 16px;
   background-color: #ffce10;
   color: #000;
-  font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
   font-weight: 700;
+  display: inline-block;
 }
 
-/* Swipe instruction */
+/* Instruction */
 .swipe-instruction {
   margin-top: 20px;
   font-size: 14px;
