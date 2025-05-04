@@ -6,7 +6,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 80%;
+  height: 100%;
   font-family: 'DM Sans', sans-serif;
   background: transparent;
   overflow: hidden; /* prevent vertical scroll bar */
@@ -25,7 +25,7 @@ body {
   width: 90vw;
   max-width: 400px;
   text-align: center;
-  padding-bottom: 60px; /* ensures full content is visible */
+  padding-bottom: 100px; /* ensures full content is visible */
   overflow: visible;
 }
 
