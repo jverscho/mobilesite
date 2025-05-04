@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <div class="coming-soon-header">
     <h1 class="now-playing-title">COMING SOON</h1>
   </div>
@@ -27,68 +26,52 @@
       <a href="https://www.sunsetdriveinslo.com/lilo-stitch" target="_blank" rel="noopener noreferrer" class="view-button">View Trailer</a>
     </div>
   </div>
-
   <div class="swipe-instruction">Swipe or Click for More</div>
-
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const items = document.querySelectorAll('.carousel-item');
-    let current = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll('.carousel-item');
+  let current = 0;
 
-    function updateCarousel() {
-      items.forEach((item, index) => {
-        item.classList.toggle('active', index === current);
-      });
-    }
+  function updateCarousel() {
+    items.forEach((item, i) =>
+      item.classList.toggle('active', i === current)
+    );
+  }
+  function nextSlide() { current = (current + 1) % items.length; updateCarousel(); }
+  function prevSlide() { current = (current - 1 + items.length) % items.length; updateCarousel(); }
+  updateCarousel();
 
-    function nextSlide() {
-      current = (current + 1) % items.length;
-      updateCarousel();
-    }
+  const carousel = document.querySelector('.carousel-container');
 
-    function prevSlide() {
-      current = (current - 1 + items.length) % items.length;
-      updateCarousel();
-    }
-
-    updateCarousel();
-
-    const carousel = document.querySelector('.carousel-container');
-
-    // Click advances if not on a button or link
-    carousel.addEventListener('click', function (e) {
-      if (e.target.closest('a') || e.target.closest('button')) return;
-      nextSlide();
-    });
-
-    // Swipe detection with touchmove
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-
-    carousel.addEventListener('touchstart', function (e) {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-
-    carousel.addEventListener('touchmove', function (e) {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', function (e) {
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
-
-      // Only act if it's primarily a horizontal swipe
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (deltaX < -50) nextSlide();
-        if (deltaX > 50) prevSlide();
-        e.preventDefault(); // block any accidental scroll for horizontal swipes
-      }
-    }, { passive: false });
+  // click/tap
+  carousel.addEventListener('click', e => {
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    nextSlide();
   });
+
+  let startX = 0, startY = 0, movedX = 0, movedY = 0;
+
+  carousel.addEventListener('touchstart', e => {
+    startX = e.touches[0].screenX;
+    startY = e.touches[0].screenY;
+    movedX = movedY = 0;
+  }, { passive: true });
+
+  carousel.addEventListener('touchmove', e => {
+    movedX = e.touches[0].screenX - startX;
+    movedY = e.touches[0].screenY - startY;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', e => {
+    // only consider it a swipe if it's mostly horizontal **and** far enough
+    if (Math.abs(movedX) > Math.abs(movedY) && Math.abs(movedX) > 50) {
+      e.preventDefault();               // block native horizontal scroll
+      if (movedX < 0) nextSlide();      // swipe left → next
+      else           prevSlide();       // swipe right → prev
+    }
+    // if it wasn't a clear horizontal swipe, do nothing — vertical scroll will work
+  }, { passive: false });
+});
 </script>
 </body>
 </html>
