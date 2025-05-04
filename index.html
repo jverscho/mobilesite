@@ -21,7 +21,7 @@
       <img src="Lilo and Stitch.jpg" alt="Lilo and Stitch">
       <a href="https://www.sunsetdriveinslo.com/lilo-stitch" class="view-button">View Trailer</a>
     </div>
-    <div class="swipe-instruction">Swipe for More</div>
+    <div class="swipe-instruction">Swipe or Click for More</div>
   </div>
 
   <script>
@@ -46,7 +46,10 @@
       }
 
       updateCarousel();
-
+ 
+      // Add mouse click support to advance carousel
+      document.querySelector('.carousel-container').addEventListener('click', () => {nextSlide();});
+      
       // Swipe Support
       let touchStartX = 0;
       let touchEndX = 0;
