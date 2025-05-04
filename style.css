@@ -12,7 +12,8 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: auto;  /* allow parent scroll chaining */
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
 }
 
 /* Layout */
@@ -46,6 +47,7 @@ body {
   max-width: 400px;
   text-align: center;
   padding-bottom: 40px;  /* reduced bottom padding to fix layout gap */
+  touch-action: pan-y;
 }
 
 /* Only one item visible at a time */
