@@ -12,7 +12,7 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
+  touch-action: auto;
   overscroll-behavior-y: auto;
 }
 
@@ -84,6 +84,8 @@ body {
   display: inline-block;
 }
 
+.carousel-nav {
+  touch-action: none;
 /* Instruction */
 .swipe-instruction {
   margin-top: 8px;  /* Slight spacing between button and text */
