@@ -46,11 +46,17 @@
       }
 
       updateCarousel();
- 
-      // Add mouse click support to advance carousel
-      document.querySelector('.carousel-container').addEventListener('click', () => {nextSlide();});
-      
-      // Swipe Support
+
+      // ✅ Only advance if click is NOT on a button or link
+      const carousel = document.querySelector('.carousel-container');
+      carousel.addEventListener('click', function (e) {
+        if (e.target.closest('a') || e.target.closest('button')) {
+          return; // Don't advance slide
+        }
+        nextSlide();
+      });
+
+      // ✅ Swipe gesture support
       let touchStartX = 0;
       let touchEndX = 0;
 
@@ -62,8 +68,6 @@
           prevSlide();
         }
       }
-
-      const carousel = document.querySelector('.carousel-container');
 
       carousel.addEventListener('touchstart', function (e) {
         touchStartX = e.changedTouches[0].screenX;
