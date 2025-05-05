@@ -13,7 +13,7 @@ html, body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: auto;
-  overscroll-behavior: none;
+  overscroll-behavior-y: contain;
 }
 
 /* Layout */
@@ -23,7 +23,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px 0;
-  overscroll-behavior: none;
+  overscroll-behavior-y: contain;
 }
 
 /* Heading styling */
@@ -53,7 +53,7 @@ body {
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
   -webkit-user-drag: none;
-  overscroll-behavior-y: auto;
+  overscroll-behavior-y: contain;
   user-drag: none;
 }
 
